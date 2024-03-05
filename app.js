@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 
 import userRouter from "./routes/user.js"
 import taskRouter from './routes/task.js'
@@ -7,12 +6,8 @@ import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
-import axios from "axios";
-
-
+import { createProxyMiddleware } from "http-proxy-middleware";
 export const app=express();
-
-
 config({
     path:'./data/config.env'
 });
@@ -29,18 +24,13 @@ app.use("/api/v1/users",userRouter);
 app.use("/api/v1/tasks",taskRouter);
 
 
-
-// Catch all routes and serve the React app
-app.get('*', async (req, res) => {
-    try {
-        // Redirect to the frontend server
-        const response = await axios.get(`${process.env.FRONTEND_URL}${req.url}`);
-        res.send(response.data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+app.use(
+    "*",
+    createProxyMiddleware({
+        target: process.env.FRONTEND_URL,
+        changeOrigin: true,
+    })
+);
 
 //error middleware
 app.use(errorMiddleware)
