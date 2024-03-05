@@ -7,6 +7,7 @@ import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
+import axios from "axios";
 
 
 export const app=express();
