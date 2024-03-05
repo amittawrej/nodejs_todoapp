@@ -27,11 +27,18 @@ app.use(cors({
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/tasks",taskRouter);
 
-app.use(express.static("public"));
+
 
 // Catch all routes and serve the React app
-app.get('*', (req, res) => {
-    res.redirect(`${process.env.FRONTEND_URL}${req.url}`);
+app.get('*', async (req, res) => {
+    try {
+        // Redirect to the frontend server
+        const response = await axios.get(`${process.env.FRONTEND_URL}${req.url}`);
+        res.send(response.data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 //error middleware
