@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from 'url';
+
 import userRouter from "./routes/user.js"
 import taskRouter from './routes/task.js'
 import { config } from "dotenv";
@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 export const app=express();
 
 
@@ -27,11 +27,11 @@ app.use(cors({
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/tasks",taskRouter);
 
-app.use(express.static(path.join(__dirname, "../dist")));
+app.use(express.static("public"));
 
 // Catch all routes and serve the React app
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist", "index.html"));
+    res.redirect(`${process.env.FRONTEND_URL}${req.url}`);
 });
 
 //error middleware
