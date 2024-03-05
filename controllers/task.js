@@ -40,7 +40,7 @@ export const updateTask =async(req,res,next)=>{
     await task.save();
     res.status(200).json({
         success:true,
-        ssage:"Task Updated"
+        message:"Task Updated"
     })
     } catch (error) {
       next(error)  
