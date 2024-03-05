@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
     res.redirect(process.env.FRONTEND_URL);
 });
 
-//error middleware
+// error middleware
 app.use(errorMiddleware)
 
 
