@@ -1,13 +1,17 @@
 import express from "express";
 import path from "path";
-
+import { fileURLToPath } from 'url';
 import userRouter from "./routes/user.js"
 import taskRouter from './routes/task.js'
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const app=express();
+
+
 config({
     path:'./data/config.env'
 });
