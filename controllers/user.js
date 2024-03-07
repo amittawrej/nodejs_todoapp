@@ -56,9 +56,7 @@ export const getMyProfile= (req,res,next)=>{
         res.status(200).json({
             success:true,
             user:req.user,
-        })
-        
-   
+        }) 
 }
 export const logout=(req,res)=>{
   
@@ -71,3 +69,15 @@ export const logout=(req,res)=>{
         })
    
 }
+// export const getlogin= (req,res,next)=>{    
+//     res.status(200).json({
+//         success:true,
+       
+//     })
+// }
+// export const getregister= (req,res,next)=>{    
+//     res.status(200).json({
+//         success:true,
+       
+//     })
+// }
