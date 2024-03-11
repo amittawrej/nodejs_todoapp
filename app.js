@@ -22,10 +22,7 @@ app.use(cors({
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/tasks",taskRouter);
 app.get('*', function(req, res) {
-   
-    const indexPath = process.env.FRONTEND_URL;
-    // console.log(indexPath);
-    res.redirect(indexPath);
+  res.send("Go to this page: "+"https://todobyaat.netlify.app/");
 });
 
 // error middleware
