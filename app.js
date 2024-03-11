@@ -21,11 +21,12 @@ app.use(cors({
 
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/tasks",taskRouter);
-
-
-// app.get('*', function(req, res) {
-//     res.sendFile(path.join(__dirname, 'todobtaat/dist', 'index.html'));
-//   });
+app.get('/*', function(req, res) {
+   
+    const indexPath = "https://todobyaat.netlify.app/";
+    console.log(indexPath);
+    res.redirect(indexPath);
+});
 
 // error middleware
 app.use(errorMiddleware)
